@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './index.module.scss';
+import classes from './menu-item.module.scss';
 import {withRouter} from 'react-router-dom';
 
 const MenuItem = props => {
