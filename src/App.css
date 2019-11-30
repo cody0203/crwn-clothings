@@ -6,6 +6,7 @@ body {
   font-family: 'Open Sans Condensed', sans-serif;
   margin: auto;
   padding: 20px 60px;
+  overflow: scroll;
 }
 
 a {
