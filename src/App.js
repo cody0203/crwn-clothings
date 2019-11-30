@@ -5,7 +5,7 @@ import HomePage from './modules/homepage/home.page';
 import ShopPage from './modules/shop/shop.page';
 import Header from './components/header/header.component';
 import SignInAndSignUp from './modules/sign-in-and-sign-up/sign-in-and-sign-up';
-import {auth} from './firebase/firebase.utils';
+import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 
 class App extends Component {
   constructor() {
@@ -19,9 +19,23 @@ class App extends Component {
 
   componentDidMount() {
     // Get user information until they sign out
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({currentUser: user});
-      console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        // this is same with userRef from firebase utils, return a document snapshot
+        const userRef = await createUserProfileDocument(userAuth);
+
+        // Using onSnapshot method to get data with .data()
+        // It will return fields in document
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      }
+      this.setState({currentUser: userAuth});
     });
   }
 
