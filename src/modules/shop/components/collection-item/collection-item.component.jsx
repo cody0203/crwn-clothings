@@ -11,7 +11,7 @@ const CollectionItem = props => {
       ></div>
       <div className={classes['collection-footer']}>
         <span className={classes['name']}>{name}</span>
-        <span className={classes['price']}>{price}</span>
+        <span className={classes['price']}>${price}</span>
       </div>
     </div>
   );
