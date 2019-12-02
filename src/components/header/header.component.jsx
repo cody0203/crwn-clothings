@@ -15,7 +15,7 @@ const Header = props => {
     auth.signOut();
   };
 
-  const { currentUser } = props;
+  const { currentUser, hidden } = props;
   return (
     <div className={classes['header']}>
       <Link className={classes['logo-container']} to="/">
@@ -40,13 +40,14 @@ const Header = props => {
         )}
         <CartIcon />
       </div>
-      <CartDropDown />
+      {hidden ? '' : <CartDropDown />}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser,
+  hidden: state.cart.hidden
 });
 
 export default connect(mapStateToProps)(Header);
