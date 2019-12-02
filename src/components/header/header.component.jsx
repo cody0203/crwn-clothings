@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import './header.style.scss';
 import { auth } from '../../firebase/firebase.utils';
@@ -8,12 +9,16 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { selectCartHidden } from '../../redux/cart/cart.selector';
+
 const Header = props => {
   const handleSignOut = () => {
     // auth.signOut method fired when handleSignOut fired
     // auth.signOut() is built-in method of firebase auth
     auth.signOut();
   };
+  console.log('Header component re render!');
 
   const { currentUser, hidden } = props;
   return (
@@ -45,9 +50,9 @@ const Header = props => {
   );
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser,
-  hidden: state.cart.hidden
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(Header);
