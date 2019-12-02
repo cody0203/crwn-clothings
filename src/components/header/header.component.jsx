@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import classes from './header.module.scss';
+import './header.style.scss';
 import { auth } from '../../firebase/firebase.utils';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../cart-icon/cart-icon.component';
@@ -17,24 +17,24 @@ const Header = props => {
 
   const { currentUser, hidden } = props;
   return (
-    <div className={classes['header']}>
-      <Link className={classes['logo-container']} to="/">
+    <div className="header">
+      <Link className="logo-container" to="/">
         <Logo />
       </Link>
 
-      <div className={classes['options']}>
-        <Link to="/shop" className={classes['option']}>
+      <div className="options">
+        <Link to="/shop" className="option">
           Shop
         </Link>
-        <Link to="/shop" className={classes['option']}>
+        <Link to="/shop" className="option">
           Contact
         </Link>
         {currentUser ? (
-          <div className={classes['option']} onClick={handleSignOut}>
+          <div className="option" onClick={handleSignOut}>
             Sign Out
           </div>
         ) : (
-          <Link to="/sign-in" className={classes['option']}>
+          <Link to="/sign-in" className="option">
             Sign In
           </Link>
         )}

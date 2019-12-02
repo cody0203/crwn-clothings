@@ -1,26 +1,23 @@
 import React from 'react';
-import classes from './menu-item.module.scss';
-import {withRouter} from 'react-router-dom';
+import './menu-item.style.scss';
+import { withRouter } from 'react-router-dom';
 
 const MenuItem = props => {
-  const {title, imageUrl, size, history, linkUrl, match} = props;
+  const { title, imageUrl, size, history, linkUrl, match } = props;
   const directUrl = () => {
     history.push(`${match.url}${linkUrl}`);
   };
   return (
-    <div
-      className={[classes['menu-item'], classes[size]].join(' ')}
-      onClick={directUrl}
-    >
+    <div className={`menu-item ${size ? size : ''}`} onClick={directUrl}>
       <div
-        className={classes['background-image']}
+        className="background-image"
         style={{
           backgroundImage: `url(${imageUrl})`
         }}
       />
-      <div className={classes['content']}>
-        <h1 className={classes['title']}>{title}</h1>
-        <span className={classes['subtitle']}>SHOP NOW</span>
+      <div className="content">
+        <h1 className="title">{title}</h1>
+        <span className="subtitle">SHOP NOW</span>
       </div>
     </div>
   );

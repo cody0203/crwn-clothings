@@ -1,23 +1,21 @@
 import React from 'react';
-import classes from './form-input.module.scss';
+import './form-input.style.scss';
 
 const FormInput = props => {
-  const {handleChange, label, ...otherProps} = props;
+  const { handleChange, label, ...otherProps } = props;
 
   return (
-    <div className={classes['group']}>
+    <div className="group">
       <input
-        className={classes['form-input']}
+        className="form-input"
         {...otherProps}
         onChange={handleChange}
         autoComplete="true"
       />
       {label ? (
         <label
-          className={[
-            classes['form-input-label'],
-            classes[props.value.length ? 'shrink' : '']
-          ].join(' ')}
+          className={`${props.value.length ? 'shrink' : ''} form-input-label
+          `}
         >
           {label}
         </label>
