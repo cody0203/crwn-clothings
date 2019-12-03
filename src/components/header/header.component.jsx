@@ -18,7 +18,6 @@ const Header = props => {
     // auth.signOut() is built-in method of firebase auth
     auth.signOut();
   };
-  console.log('Header component re render!');
 
   const { currentUser, hidden } = props;
   return (

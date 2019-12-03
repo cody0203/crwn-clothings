@@ -45,14 +45,12 @@ class App extends Component {
   }
 
   render() {
-    console.log('App component re render!');
-
     return (
       <div>
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop" component={ShopPage} />
           <Route path="/check-out" component={CheckoutPage} />
           <Route
             exact

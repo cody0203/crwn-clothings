@@ -9,9 +9,7 @@ import { selectCartItemsCount } from '../../redux/cart/cart.selector';
 import { toggleCart } from '../../redux/cart/cart.action';
 
 const CartIcon = props => {
-  console.log('Cart Icon component re render!');
   const { toggleCart, itemCount } = props;
-  console.log('Re render');
   return (
     <div className="cart-icon" onClick={toggleCart}>
       <ShoppingIcon className="shopping-icon" />

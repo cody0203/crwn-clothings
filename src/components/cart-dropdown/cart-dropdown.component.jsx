@@ -11,8 +11,6 @@ import { selectCartItems } from '../../redux/cart/cart.selector';
 import { toggleCart } from '../../redux/cart/cart.action';
 
 const CartDropDown = ({ cartItems, history, dispatch }) => {
-  console.log('Cart Dropdown component re render!');
-
   const goToCheckout = () => {
     dispatch(toggleCart());
     history.push('/check-out');
