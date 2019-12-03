@@ -6,7 +6,13 @@ import { auth } from '../../firebase/firebase.utils';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
-import HeaderStyles from './header.styles';
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLink,
+  OptionDiv
+} from './header.styles';
 
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { selectCartHidden } from '../../redux/cart/cart.selector';
@@ -20,27 +26,23 @@ const Header = props => {
 
   const { currentUser, hidden } = props;
   return (
-    <HeaderStyles.HeaderContainer>
-      <HeaderStyles.LogoContainer to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo />
-      </HeaderStyles.LogoContainer>
+      </LogoContainer>
 
-      <HeaderStyles.OptionsContainer>
-        <HeaderStyles.OptionLink to="/shop">Shop</HeaderStyles.OptionLink>
-        <HeaderStyles.OptionLink to="/shop">Contact</HeaderStyles.OptionLink>
+      <OptionsContainer>
+        <OptionLink to="/shop">Shop</OptionLink>
+        <OptionLink to="/shop">Contact</OptionLink>
         {currentUser ? (
-          <HeaderStyles.OptionDiv onClick={handleSignOut}>
-            Sign Out
-          </HeaderStyles.OptionDiv>
+          <OptionDiv onClick={handleSignOut}>Sign Out</OptionDiv>
         ) : (
-          <HeaderStyles.OptionLink to="/sign-in">
-            Sign In
-          </HeaderStyles.OptionLink>
+          <OptionLink to="/sign-in">Sign In</OptionLink>
         )}
         <CartIcon />
-      </HeaderStyles.OptionsContainer>
+      </OptionsContainer>
       {hidden ? '' : <CartDropDown />}
-    </HeaderStyles.HeaderContainer>
+    </HeaderContainer>
   );
 };
 

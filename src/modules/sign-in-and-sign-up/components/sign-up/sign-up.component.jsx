@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import classes from './sign-up.module.scss';
+import React, { Component } from 'react';
 import FormInput from '../../../../components/form-input/form-input.component';
 import CustomButton from '../../../../components/custom-button/custom-button.component';
 import {
   auth,
   createUserProfileDocument
 } from '../../../../firebase/firebase.utils';
+
+import { SignUpContainer } from './sign-up.style';
 
 class SignUp extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class SignUp extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const {email, displayName, password, confirmPassword} = this.state;
+    const { email, displayName, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
       alert("Password don't match");
@@ -30,10 +31,13 @@ class SignUp extends Component {
     try {
       // Using createUserWithEmailAndPassword built-in method of firebase to create user with email and password
       // from state.
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
 
       // Then send it to firestore with createUserProfileDocument
-      await createUserProfileDocument(user, {displayName});
+      await createUserProfileDocument(user, { displayName });
 
       this.setState({
         email: '',
@@ -47,7 +51,7 @@ class SignUp extends Component {
   };
 
   handleChange = e => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     this.setState({
       [name]: value
@@ -55,10 +59,10 @@ class SignUp extends Component {
   };
 
   render() {
-    const {email, displayName, password, confirmPassword} = this.state;
+    const { email, displayName, password, confirmPassword } = this.state;
 
     return (
-      <div className={classes['sign-up']}>
+      <SignUpContainer>
         <h2>I do not have an account</h2>
         <span>Sign up with your email and password</span>
 
@@ -100,7 +104,7 @@ class SignUp extends Component {
           />
           <CustomButton type="submit">Sign in</CustomButton>
         </form>
-      </div>
+      </SignUpContainer>
     );
   }
 }
