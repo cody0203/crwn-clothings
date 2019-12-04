@@ -23,7 +23,6 @@ const CollectionPage = ({ collection }) => {
 //  Ngoài việc mapping state vào component, mapStateToProps còn có thể lấy ngược lại các props từ component
 // Lúc này, tham số đầu tiên sẽ là state từ redux, tham số thứ 2 là props của component
 function mapStateToProps(state, ownProps) {
-  console.log(arguments);
   return {
     // Vì selector selectCollection là 1 function nhận vào 1 tham số và trả về function createSelector
     // Nên sẽ truyền tham số vào cho selector như dưới đây.

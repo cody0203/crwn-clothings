@@ -23,7 +23,12 @@ export const selectCollection = collectionUrlParam =>
     collections ? collections[collectionUrlParam] : null
   );
 
-export const selectIsCollectionFetching = createSelector(
+// Selector for check if collections is empty object,
+export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
-  shop => shop.isFetching
+
+  // Because initial state of collections is null
+  // So we can use !! to converted null to false because null is a falsy value
+  // Then use it for loading value of Loading HOC
+  shop => !!shop.collections
 );
