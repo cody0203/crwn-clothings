@@ -24,18 +24,16 @@ export const fetchCollectionsFailure = errorMessage => {
 };
 
 export const fetchCollectionStartAsync = () => {
-  return dispatch => {
+  return async dispatch => {
     const collectionRef = firestore.collection('collections');
     dispatch(fetchCollectionsStart());
-
-    collectionRef
-      .get()
-      .then(snapshot => {
-        const collectionsMap = convertCollectionsSnapshotToArray(snapshot);
-        dispatch(fetchCollectionsSuccess(collectionsMap));
-      })
-      .catch(error => {
-        dispatch(fetchCollectionsFailure(error.message));
-      });
+    try {
+      const snapShots = await collectionRef.get();
+      const collectionsMap = convertCollectionsSnapshotToArray(snapShots);
+      dispatch(fetchCollectionsSuccess(collectionsMap));
+    } catch (error) {
+      dispatch(fetchCollectionsFailure(error.message));
+    }
   };
 };
+  
