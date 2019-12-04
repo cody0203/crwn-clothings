@@ -20,6 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
+
     // Get user information until they sign out
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
