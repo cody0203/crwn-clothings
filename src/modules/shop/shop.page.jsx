@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import CollectionPreview from '../../components/collections-overview/collections-overview.component';
-import CollectionPage from '../collection/collection.page';
-import WithSpinner from '../../components/hocs/with-spinner/with-spinner.component';
 
-import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selector';
+import CollectionOverviewContainer from '../../components/collections-overview/collection-overview.container';
+import CollectionPageContainer from '../collection/collection.container';
 
 import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
-const CollectionPreviewWithSpinner = WithSpinner(CollectionPreview);
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class Shop extends Component {
   constructor() {
@@ -34,28 +29,18 @@ class Shop extends Component {
   }
 
   render() {
-    const { match, isCollectionLoaded } = this.props;
+    const { match } = this.props;
     return (
       <div>
         <Switch>
           <Route
             exact
             path={`${match.path}`}
-            render={props => (
-              <CollectionPreviewWithSpinner
-                isLoading={!isCollectionLoaded}
-                {...props}
-              />
-            )}
+            component={CollectionOverviewContainer}
           />
           <Route
             path={`${match.path}/:collectionId`}
-            render={props => (
-              <CollectionPageWithSpinner
-                isLoading={!isCollectionLoaded}
-                {...props}
-              />
-            )}
+            component={CollectionPageContainer}
           />
         </Switch>
       </div>
@@ -67,8 +52,4 @@ const mapDispatchToProps = dispatch => ({
   fetchCollectionStartAsync: () => dispatch(fetchCollectionStartAsync())
 });
 
-const mapStateToProps = createStructuredSelector({
-  isCollectionLoaded: selectIsCollectionsLoaded
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Shop);
+export default connect(null, mapDispatchToProps)(Shop);

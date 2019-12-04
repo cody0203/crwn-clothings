@@ -23,6 +23,11 @@ export const selectCollection = collectionUrlParam =>
     collections ? collections[collectionUrlParam] : null
   );
 
+export const selectIsFetchingCollections = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
+
 // Selector for check if collections is empty object,
 export const selectIsCollectionsLoaded = createSelector(
   [selectShop],

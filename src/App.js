@@ -6,9 +6,9 @@ import { createStructuredSelector } from 'reselect';
 import './App.css';
 import HomePage from './modules/homepage/home.page';
 import ShopPage from './modules/shop/shop.page';
-import CheckoutPage from './modules/checkout/checkout.page';
+import CheckoutPageContainer from './modules/checkout/checkout.container';
 
-import Header from './components/header/header.component';
+import HeaderContainer from './components/header/header.container';
 import SignInAndSignUp from './modules/sign-in-and-sign-up/sign-in-and-sign-up';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -48,11 +48,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <HeaderContainer />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/check-out" component={CheckoutPage} />
+          <Route path="/check-out" component={CheckoutPageContainer} />
           <Route
             exact
             path="/sign-in"
