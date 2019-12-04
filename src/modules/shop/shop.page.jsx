@@ -30,7 +30,15 @@ class Shop extends Component {
     const { dispatch } = this.props;
     const collectionRef = firestore.collection('collections');
 
-    this.unSubscribeFromSnapShot = collectionRef.onSnapshot(async snapshot => {
+    // Observer pattern
+    // this.unSubscribeFromSnapShot = collectionRef.onSnapshot(async snapshot => {
+    //   const collectionsMap = convertCollectionsSnapshotToArray(snapshot);
+    //   dispatch(updateCollections(collectionsMap));
+    //   this.setState({ loading: false });
+    // });
+
+    // Promise pattern
+    collectionRef.get().then(snapshot => {
       const collectionsMap = convertCollectionsSnapshotToArray(snapshot);
       dispatch(updateCollections(collectionsMap));
       this.setState({ loading: false });
