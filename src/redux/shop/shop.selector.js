@@ -22,3 +22,8 @@ export const selectCollection = collectionUrlParam =>
     // Tìm đến collection có key === với url parameter của page
     collections ? collections[collectionUrlParam] : null
   );
+
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
