@@ -27,7 +27,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   // if snapShot is not existed, we will go to create new user
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
-
     const createdAt = new Date();
 
     // Wrap set action in try/catch and call it with await keyword for asynchronous action
@@ -105,14 +104,24 @@ export const convertCollectionsSnapshotToArray = collection => {
   }, {});
 };
 
+// Subscribe function for streaming get current user from firebase firestore
+// Likely function in componentDidMount() of App component
+export const getGetCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 // firebase firestore created
 export const firestore = firebase.firestore();
 
 // auth provider created
-const provider = new firebase.auth.GoogleAuthProvider();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 // Open popup to select google account when sign in with google accout
-provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export default firebase;

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FormInput from '../../../../components/form-input/form-input.component';
 import CustomButton from '../../../../components/custom-button/custom-button.component';
-import {
-  auth,
-  createUserProfileDocument
-} from '../../../../firebase/firebase.utils';
+// import {
+//   auth,
+//   createUserProfileDocument
+// } from '../../../../firebase/firebase.utils';
+
+import { signUpStart } from '../../../../redux/user/user.action';
 
 import { SignUpContainer } from './sign-up.style';
 
@@ -19,35 +22,38 @@ class SignUp extends Component {
     };
   }
 
-  handleSubmit = async e => {
+  handleSubmit = e => {
     e.preventDefault();
     const { email, displayName, password, confirmPassword } = this.state;
+    const { signUpStart } = this.props;
 
     if (password !== confirmPassword) {
       alert("Password don't match");
       return;
     }
 
-    try {
-      // Using createUserWithEmailAndPassword built-in method of firebase to create user with email and password
-      // from state.
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
+    signUpStart({ email, password, displayName });
 
-      // Then send it to firestore with createUserProfileDocument
-      await createUserProfileDocument(user, { displayName });
+    // try {
+    //   // Using createUserWithEmailAndPassword built-in method of firebase to create user with email and password
+    //   // from state.
+    //   const { user } = await auth.createUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
 
-      this.setState({
-        email: '',
-        displayName: '',
-        password: '',
-        confirmPassword: ''
-      });
-    } catch (err) {
-      console.log(err.message);
-    }
+    //   // Then send it to firestore with createUserProfileDocument
+    //   await createUserProfileDocument(user, { displayName });
+
+    //   this.setState({
+    //     email: '',
+    //     displayName: '',
+    //     password: '',
+    //     confirmPassword: ''
+    //   });
+    // } catch (err) {
+    //   console.log(err.message);
+    // }
   };
 
   handleChange = e => {
@@ -102,11 +108,15 @@ class SignUp extends Component {
             handleChange={this.handleChange}
             required
           />
-          <CustomButton type="submit">Sign in</CustomButton>
+          <CustomButton type="submit">Sign Up</CustomButton>
         </form>
       </SignUpContainer>
     );
   }
 }
 
-export default SignUp;
+const mapDispatchToProps = dispatch => ({
+  signUpStart: userDetails => dispatch(signUpStart(userDetails))
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);

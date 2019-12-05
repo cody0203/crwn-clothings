@@ -1,6 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { auth } from '../../firebase/firebase.utils';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIconContainer from '../cart-icon/cart-icon.container';
 import CartDropDownContainer from '../cart-dropdown/cart-dropdown.container';
@@ -12,11 +12,14 @@ import {
   OptionDiv
 } from './header.styles';
 
+import { signOutStart } from '../../redux/user/user.action';
+
 const Header = props => {
+  const { signOutStart } = props;
   const handleSignOut = () => {
     // auth.signOut method fired when handleSignOut fired
     // auth.signOut() is built-in method of firebase auth
-    auth.signOut();
+    signOutStart();
   };
 
   const { currentUser, hidden } = props;
@@ -41,4 +44,8 @@ const Header = props => {
   );
 };
 
-export default Header;
+const mapDispatchToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart())
+});
+
+export default connect(null, mapDispatchToProps)(Header);
