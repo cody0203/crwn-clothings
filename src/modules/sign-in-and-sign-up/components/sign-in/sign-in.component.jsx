@@ -17,15 +17,18 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
     password: ''
   });
 
+  const { email, password } = signInData;
+
   const handleSubmit = e => {
     e.preventDefault();
 
-    emailSignInStart(signInData.email, signInData.password);
+    emailSignInStart(email, password);
   };
 
   const handleChange = e => {
     const { value, name } = e.target;
     setSignInData({
+      ...signInData,
       [name]: value
     });
   };
@@ -40,7 +43,7 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
           label="Email"
           type="email"
           name="email"
-          value={signInData.email}
+          value={email}
           handleChange={handleChange}
           required
         />
@@ -48,7 +51,7 @@ const SignIn = ({ googleSignInStart, emailSignInStart }) => {
           label="Password"
           type="password"
           name="password"
-          value={signInData.password}
+          value={password}
           handleChange={handleChange}
           required
         />
