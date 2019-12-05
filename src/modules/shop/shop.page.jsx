@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CollectionOverviewContainer from '../../components/collections-overview/collection-overview.container';
 import CollectionPageContainer from '../collection/collection.container';
 
-import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 class Shop extends Component {
   constructor() {
@@ -18,14 +18,14 @@ class Shop extends Component {
   unSubscribeFromSnapShot = null;
 
   componentDidMount() {
-    const { fetchCollectionStartAsync } = this.props;
+    const { fetchCollectionsStart } = this.props;
     // Observer pattern
     // this.unSubscribeFromSnapShot = collectionRef.onSnapshot(async snapshot => {
     //   const collectionsMap = convertCollectionsSnapshotToArray(snapshot);
     //   dispatch(updateCollections(collectionsMap));
     //   this.setState({ loading: false });
     // });
-    fetchCollectionStartAsync();
+    fetchCollectionsStart();
   }
 
   render() {
@@ -49,7 +49,7 @@ class Shop extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionStartAsync: () => dispatch(fetchCollectionStartAsync())
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 export default connect(null, mapDispatchToProps)(Shop);
