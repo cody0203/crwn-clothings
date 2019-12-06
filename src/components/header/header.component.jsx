@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -12,6 +12,7 @@ import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import { selectCartHidden } from '../../redux/cart/cart.selector';
 
 import CurrentUserContext from '../../context/current-user/current-user.context';
+import { CartContext } from '../../context/providers/cart/cart.provider';
 
 const Header = props => {
   const handleSignOut = () => {
@@ -19,10 +20,10 @@ const Header = props => {
     // auth.signOut() is built-in method of firebase auth
     auth.signOut();
   };
-
   const currentUser = useContext(CurrentUserContext);
 
-  const { hidden } = props;
+  const { hidden } = useContext(CartContext);
+
   return (
     <div className="header">
       <Link className="logo-container" to="/">
