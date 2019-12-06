@@ -3,11 +3,12 @@ import './collection.style.scss';
 
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
-import CollectionContext from '../../context/collection/collection.context';
+import ShopContext from '../../context/collection/collection.context';
 
 const CollectionPage = ({ match }) => {
-  const collections = useContext(CollectionContext);
+  const collections = useContext(ShopContext);
   const collection = collections[match.params.collectionId];
+
   const { title, items } = collection;
   return (
     <div className="collection-page">
