@@ -37,8 +37,13 @@ export const cartUtils = {
     });
   },
 
-  totalItemsCount: cartItems =>
+  getItemsCount: cartItems =>
     cartItems.reduce((acc, item) => {
       return acc + item.quantity;
+    }, 0),
+
+  getTotalCount: cartItems =>
+    cartItems.reduce((acc, item) => {
+      return acc + item.quantity * item.price;
     }, 0)
 };
