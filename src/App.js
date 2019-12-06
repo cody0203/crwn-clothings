@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import './App.css';
-import HomePage from './modules/homepage/home.page';
-import ShopPage from './modules/shop/shop.page';
-import CheckoutPageContainer from './modules/checkout/checkout.container';
 
 import HeaderContainer from './components/header/header.container';
-import SignInAndSignUp from './modules/sign-in-and-sign-up/sign-in-and-sign-up';
+import Spinner from './components/spinner/spinner.component';
 
 import { selectCurrentUser } from './redux/user/user.selector';
 import { checkUserSession } from './redux/user/user.action';
+
+const HomePage = lazy(() => import('./modules/homepage/home.page'));
+const ShopPage = lazy(() => import('./modules/shop/shop.page'));
+const CheckoutPageContainer = lazy(() =>
+  import('./modules/checkout/checkout.container')
+);
+const SignInAndSignUp = lazy(() =>
+  import('./modules/sign-in-and-sign-up/sign-in-and-sign-up')
+);
 
 const App = ({ checkUserSession, currentUser }) => {
   // componentDidMount() {
@@ -47,18 +53,21 @@ const App = ({ checkUserSession, currentUser }) => {
   return (
     <div>
       <HeaderContainer />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route path="/check-out" component={CheckoutPageContainer} />
-        <Route
-          exact
-          path="/sign-in"
-          render={() =>
-            currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
-          }
-        />
-      </Switch>
+      <Suspense fallback={<Spinner />}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/check-out" component={CheckoutPageContainer} />
+          <Route
+            exact
+            path="/sign-in"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+            }
+          />
+          <div>Test</div>
+        </Switch>
+      </Suspense>
     </div>
   );
 };
