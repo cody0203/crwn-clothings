@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -9,8 +9,9 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 
-import { selectCurrentUser } from '../../redux/user/user.selector';
 import { selectCartHidden } from '../../redux/cart/cart.selector';
+
+import CurrentUserContext from '../../context/current-user/current-user.context';
 
 const Header = props => {
   const handleSignOut = () => {
@@ -19,7 +20,9 @@ const Header = props => {
     auth.signOut();
   };
 
-  const { currentUser, hidden } = props;
+  const currentUser = useContext(CurrentUserContext);
+
+  const { hidden } = props;
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -50,7 +53,6 @@ const Header = props => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
   hidden: selectCartHidden
 });
 
