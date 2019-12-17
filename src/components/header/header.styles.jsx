@@ -13,7 +13,7 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 25px;
 
-  @media (max-width: 800px) {
+  @media (max-width: 767.8px) {
     height: 60px;
     padding: 10px;
     margin-bottom: 20px;
@@ -23,7 +23,7 @@ export const HeaderContainer = styled.div`
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
-  padding: 25px;
+  padding: 25px 0;
 
   @media (max-width: 767.8px) {
     width: 50px;
@@ -74,6 +74,7 @@ export const MobileMenu = styled.div`
     z-index: 100;
     box-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.05);
     align-items: center;
+    padding: 5px;
   }
 `;
 
