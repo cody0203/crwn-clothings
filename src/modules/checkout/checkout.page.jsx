@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CheckoutItemContainer from './checkout-item/checkout-item.container';
+import CheckoutItemContainer from '../../components/checkout-item/checkout-item.container';
 import StripeButton from '../../components/stripe-button/stripe-button.component';
 
 import {

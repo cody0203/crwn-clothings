@@ -3,7 +3,7 @@ import {
   removeItemFromCart,
   removeItem,
   addItem
-} from '../../../redux/cart/cart.action';
+} from '../../redux/cart/cart.action';
 
 import CheckoutItem from './checkout-item.component';
 

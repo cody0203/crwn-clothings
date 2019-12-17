@@ -7,7 +7,7 @@ import {
   ContentContainer,
   Title,
   SubTitle
-} from './menu-item.style.jsx';
+} from './menu-item.style';
 const MenuItem = props => {
   const { title, imageUrl, size, history, linkUrl, match } = props;
   const directUrl = () => {

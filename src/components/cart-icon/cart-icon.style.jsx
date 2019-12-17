@@ -9,9 +9,12 @@ export const CartIconContainer = styled.div`
   justify-content: center;
   cursor: pointer;
 `;
-export const ShoppingIconContainer = styled.div`
+export const ShoppingIconContainer = styled.img`
   width: 24px;
-  height: 24px;
+
+  @media (max-width: 767.7px) {
+    width: 30px;
+  }
 `;
 export const ItemCountContainer = styled.span`
   position: absolute;

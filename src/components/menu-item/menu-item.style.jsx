@@ -45,7 +45,9 @@ export const MenuItemContainer = styled.div`
   margin: 0 7.5px 15px;
   overflow: hidden;
 
-  ${({ size }) => (size ? 'height: 380px' : '')}
+  @media (min-width: 768px) {
+    ${({ size }) => (size ? 'height: 380px' : '')}
+  }
 
   &:hover {
     cursor: pointer;

@@ -16,10 +16,17 @@ export const AddToCartButton = styled(CustomButton)`
   position: absolute;
   top: 255px;
   display: none;
+
+  @media (max-width: 767.8px) {
+    display: block;
+    opacity: 0.9;
+    min-width: unset;
+    padding: 0 10px;
+  }
 `;
 
 export const CollectionItemContainer = styled.div`
-  width: 22vw;
+  width: 20vw;
   display: flex;
   flex-direction: column;
   height: 350px;
@@ -36,6 +43,20 @@ export const CollectionItemContainer = styled.div`
       display: flex;
     }
   }
+
+  @media (max-width: 767.8px) {
+    width: 40vw;
+
+    &:hover {
+      .image {
+        opacity: unset;
+      }
+
+      button {
+        opacity: unset;
+      }
+    }
+  }
 `;
 
 export const ItemFooter = styled.div`
@@ -47,9 +68,9 @@ export const ItemFooter = styled.div`
 `;
 
 export const ItemName = styled.span`
-  width: 90%;
+  width: 75%;
   margin-bottom: 15px;
 `;
 export const ItemPrice = styled.span`
-  width: 10%;
+  text-align: right;
 `;

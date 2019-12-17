@@ -1,5 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
+
+import shop from '../../assets/shop.png';
+import user from '../../assets/user.png';
+import logout from '../../assets/logout.png';
 
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartIconContainer from '../cart-icon/cart-icon.container';
@@ -9,20 +12,49 @@ import {
   LogoContainer,
   OptionsContainer,
   OptionLink,
-  OptionDiv
+  OptionDiv,
+  MenuItemContainer,
+  MobileMenu,
+  MenuItemIcon
 } from './header.styles';
-
-import { signOutStart } from '../../redux/user/user.action';
 
 const Header = props => {
   const { signOutStart } = props;
+  console.log(props);
   const handleSignOut = () => {
-    // auth.signOut method fired when handleSignOut fired
-    // auth.signOut() is built-in method of firebase auth
     signOutStart();
   };
 
   const { currentUser, hidden } = props;
+
+  const menuItems = (
+    <>
+      <OptionLink to="/shop">Shop</OptionLink>
+      {currentUser ? (
+        <OptionDiv onClick={handleSignOut}>Sign Out</OptionDiv>
+      ) : (
+        <OptionLink to="/sign-in">Sign In</OptionLink>
+      )}
+    </>
+  );
+
+  const mobileMenuItem = (
+    <>
+      <OptionLink to="/shop">
+        <MenuItemIcon src={shop} alt="shop" />
+      </OptionLink>
+      {currentUser ? (
+        <OptionDiv onClick={handleSignOut}>
+          <MenuItemIcon src={logout} alt="logout" />
+        </OptionDiv>
+      ) : (
+        <OptionLink to="/sign-in">
+          <MenuItemIcon src={user} alt="user" />
+        </OptionLink>
+      )}
+    </>
+  );
+
   return (
     <HeaderContainer>
       <LogoContainer to="/">
@@ -30,22 +62,16 @@ const Header = props => {
       </LogoContainer>
 
       <OptionsContainer>
-        <OptionLink to="/shop">Shop</OptionLink>
-        <OptionLink to="/shop">Contact</OptionLink>
-        {currentUser ? (
-          <OptionDiv onClick={handleSignOut}>Sign Out</OptionDiv>
-        ) : (
-          <OptionLink to="/sign-in">Sign In</OptionLink>
-        )}
+        <MenuItemContainer>{menuItems}</MenuItemContainer>
         <CartIconContainer />
       </OptionsContainer>
+      <MobileMenu>
+        {mobileMenuItem}
+        <CartIconContainer />
+      </MobileMenu>
       {hidden ? '' : <CartDropDownContainer />}
     </HeaderContainer>
   );
 };
 
-const mapDispatchToProps = dispatch => ({
-  signOutStart: () => dispatch(signOutStart())
-});
-
-export default connect(null, mapDispatchToProps)(Header);
+export default Header;

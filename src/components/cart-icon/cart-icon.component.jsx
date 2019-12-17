@@ -6,14 +6,14 @@ import {
   ItemCountContainer
 } from './cart-icon.style';
 
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
+import shoppingIcon from '../../assets/shopping-bag.png';
 
 const CartIcon = props => {
   const { toggleCart, itemCount } = props;
 
   return (
     <CartIconContainer onClick={toggleCart}>
-      <ShoppingIconContainer as={ShoppingIcon} />
+      <ShoppingIconContainer src={shoppingIcon} alt="shopping-icon" />
       <ItemCountContainer>{itemCount}</ItemCountContainer>
     </CartIconContainer>
   );

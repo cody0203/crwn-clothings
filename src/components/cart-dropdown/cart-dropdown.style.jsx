@@ -13,6 +13,12 @@ export const CartDropdownContainer = styled.div`
   top: 90px;
   right: 60px;
   z-index: 5;
+
+  @media (max-width: 767.8px) {
+    bottom: 70px;
+    top: auto;
+    position: fixed;
+  }
 `;
 
 export const CartItems = styled.div`

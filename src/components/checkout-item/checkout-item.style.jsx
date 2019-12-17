@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const commonWidth = css`
-  width: 23%;
+  min-width: 23%;
 `;
 
 const cursorPointer = css`
@@ -9,6 +9,8 @@ const cursorPointer = css`
 `;
 
 export const CheckoutItemContainer = styled.div`
+  overflow: auto;
+
   width: 100%;
   display: flex;
   min-height: 100px;
@@ -19,7 +21,7 @@ export const CheckoutItemContainer = styled.div`
 `;
 
 export const ImageContainer = styled.div`
-  width: 23%;
+  min-width: 23%;
   padding-right: 15px;
 
   img {
@@ -34,7 +36,6 @@ export const Name = styled.span`
 
 export const QuantityContainer = styled.span`
   ${commonWidth}
-  padding-left: 20px;
   display: flex;
 `;
 

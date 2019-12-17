@@ -11,9 +11,15 @@ export const CheckoutPageContainer = styled.div`
   button {
     margin-left: auto;
   }
+
+  @media (max-width: 767.8px) {
+    width: 100%;
+  }
 `;
 
 export const CheckoutHeader = styled.div`
+  overflow: auto;
+
   width: 100%;
   padding: 10px 0;
   display: flex;

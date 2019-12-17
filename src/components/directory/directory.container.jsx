@@ -3,7 +3,7 @@ import { createStructuredSelector } from 'reselect';
 
 import Directory from './directory.component';
 
-import { selectSections } from '../../../../redux/directory/directory.selector';
+import { selectSections } from '../../redux/directory/directory.selector';
 
 const mapStateToProps = createStructuredSelector({
   sections: selectSections
